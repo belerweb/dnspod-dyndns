@@ -2,8 +2,9 @@ package com.belerweb.dnspod.dyndns.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,34 +24,34 @@ public class DynDNSAPI {
   private static String ip;
 
   @RequestMapping("/update")
-  public void update(@RequestHeader String authorization, @RequestParam String myip, Model model) {
-    String resultText = "googd";
+  public ResponseEntity<String> update(@RequestHeader String authorization,
+      @RequestParam String myip) {
     if (!authorization.equals(System.getenv("DNSPod.DynDNS.authorization"))) {
-      resultText = "badauth";
+      return new ResponseEntity<String>("badauth", HttpStatus.FORBIDDEN);
+    }
+    if (myip.equals(ip)) {
+      LOGGER.info("IP {} no change, keep it and ignore.", ip);
     } else {
-      if (!myip.equals(ip)) {
-        try {
-          DNSPodAPI api = DNSPodAPIFactory.create();
-          int domianId = Integer.parseInt(System.getenv("DNSPod.DynDNS.domianId"));
-          int recordId = Integer.parseInt(System.getenv("DNSPod.DynDNS.recordId"));
-          String subDomain = System.getenv("DNSPod.DynDNS.subDomain");
-          ModifyRecordResult result =
-              api.modifyRecord(domianId, recordId, subDomain, RecordType.A, RecordLine.DEFAULT,
-                  myip, 1, 600);
-          ip = myip;
-          if (!result.isSuccess()) {
-            LOGGER.error(result.getStatus().getMessage());
-            resultText = "dnserr";
-          }
-          LOGGER.info(result.getStatus().getMessage());
-          resultText = "good";
-        } catch (Exception e) {
-          resultText = "911";
+      try {
+        DNSPodAPI api = DNSPodAPIFactory.create();
+        int domianId = Integer.parseInt(System.getenv("DNSPod.DynDNS.domianId"));
+        int recordId = Integer.parseInt(System.getenv("DNSPod.DynDNS.recordId"));
+        String subDomain = System.getenv("DNSPod.DynDNS.subDomain");
+        ModifyRecordResult result =
+            api.modifyRecord(domianId, recordId, subDomain, RecordType.A, RecordLine.DEFAULT, myip,
+                1, 600);
+        if (!result.isSuccess()) {
+          LOGGER.error(result.getStatus().getMessage());
+          return new ResponseEntity<String>("dnserr", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        ip = myip;
+        LOGGER.info(result.getStatus().getMessage());
+      } catch (Exception e) {
+        return new ResponseEntity<String>("911", HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }
 
-    model.addAttribute("result", resultText);
+    return new ResponseEntity<String>("good", HttpStatus.OK);
   }
 
 }

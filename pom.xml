@@ -61,7 +61,8 @@
 		<dependency.mysql.version>5.1.24</dependency.mysql.version>
 		<dependency.dnspodjava.version>1.0.0-alpha</dependency.dnspodjava.version>
 		<dependency.junit.version>4.11</dependency.junit.version>
-		<dependency.jetty.version> 9.0.0.v20130308</dependency.jetty.version>
+		<dependency.jetty.version>9.0.0.v20130308</dependency.jetty.version>
+		<dependency.servlet-api.version> 2.5</dependency.servlet-api.version>
 	</properties>
 
 	<dependencies>
@@ -221,6 +222,13 @@
 			<artifactId>spring-test</artifactId>
 			<version>${dependency.spring.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- provided dependency -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${dependency.servlet-api.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

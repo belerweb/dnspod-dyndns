@@ -10,7 +10,7 @@
 
 	<groupId>com.belerweb</groupId>
 	<artifactId>dnspod-dyndns</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 
 	<name>DNSPod DynDNS</name>

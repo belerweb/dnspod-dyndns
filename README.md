@@ -3,7 +3,7 @@
 **DNSPod DynDNS** goal is to develop a [dynamic DNS](http://en.wikipedia.org/wiki/Dynamic_DNS) server which contains various implements, e.g. [dyn.com](http://dyn.com/), [GnuDIP](http://gnudip2.sourceforge.net/) ..., supports routers as clients.
 
 ### Join Me ###
-DNSPod DynDNS is under development, I expect your support, contribution and so on.
+DNSPod DynDNS is under development, I expect your support, contribution and etc.
 
 ### Best Practice ###
 HUAWEI HG8245 + DNSPod DynDNS + DNSPod + Heroku

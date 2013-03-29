@@ -2,6 +2,10 @@
 
 **DNSPod DynDNS** goal is to develop a [dynamic DNS](http://en.wikipedia.org/wiki/Dynamic_DNS) server which contains various implements, e.g. [dyn.com](http://dyn.com/), [GnuDIP](http://gnudip2.sourceforge.net/) ..., supports routers as clients.
 
+### Supported Router ###
+ - Router with dyndns(members.dyndns.org) supported.
+ - Router with qdns(members.3322.org) supported.
+
 ### Join Me ###
 DNSPod DynDNS is under development, I expect your support, contribution and etc.
 

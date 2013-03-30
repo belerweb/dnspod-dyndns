@@ -15,6 +15,12 @@ import com.belerweb.dnspod.RecordLine;
 import com.belerweb.dnspod.RecordType;
 import com.belerweb.dnspod.result.ModifyRecordResult;
 
+/**
+ * API implement like members.dyndns.org, members.3322.org
+ * 
+ * @author jun
+ * 
+ */
 @Controller
 @RequestMapping("/nic")
 public class DynDNSAPI {
@@ -24,7 +30,7 @@ public class DynDNSAPI {
   private static String ip;
 
   /**
-   * API implement like members.dyndns.org, members.3322.org 
+   * Update DNS record.
    * 
    * @param authorization Basic authorization.
    * @param myip IP address.

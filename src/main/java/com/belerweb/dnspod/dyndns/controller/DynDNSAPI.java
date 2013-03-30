@@ -23,6 +23,13 @@ public class DynDNSAPI {
 
   private static String ip;
 
+  /**
+   * API implement like members.dyndns.org, members.3322.org 
+   * 
+   * @param authorization Basic authorization.
+   * @param myip IP address.
+   * @return
+   */
   @RequestMapping("/update")
   public ResponseEntity<String> update(@RequestHeader String authorization,
       @RequestParam String myip) {
